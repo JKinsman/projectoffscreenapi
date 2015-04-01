@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  validates_uniqueness_of :username
-  validates_uniqueness_of :email
 
   # GET /users
   # GET /users.json
