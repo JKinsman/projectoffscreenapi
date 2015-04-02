@@ -37,6 +37,28 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users-find.json
+  def findByUsernamePassword
+    username = "JKinsman1986" #params[:username]
+    password = "admin" #params[:password]
+    @users = User.all
+    @user = nil
+    @users.each do |user|
+      if user.password.downcase == password.downcase and user.username.downcase == user.username.downcase
+        @user = User.find(user.id)
+      end
+    end
+    puts @users
+    #@user = users.where(password: password)
+    respond_to do |format|
+      unless @user.nil?
+        params[:id] = @user.id
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.json { render json: "An Error occurred", status: :unprocessable_entity }
+      end
+    end
+  end
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
