@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
   # GET /users-find.json
   def findByUsernamePassword
-    username = params[:username]
-    password = params[:password]
+    username = 'JKinsman1986@gmail.com' params[:username]
+    password = 'admin' params[:password]
     @users = User.all
     @user = nil
     @users.each do |user|
