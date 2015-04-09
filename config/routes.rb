@@ -58,5 +58,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get 'users-find' => 'users#findByUsernamePassword'
+  get 'users-find' => 'users#findByUsername'
 end

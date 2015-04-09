@@ -38,18 +38,16 @@ class UsersController < ApplicationController
   end
 
   # GET /users-find.json
-  def findByUsernamePassword
+  def findByUsername
     username = params[:username]
-    password = params[:password]
     @users = User.all
     @user = nil
     @users.each do |user|
-      if user.password.downcase == password.downcase and user.username.downcase == user.username.downcase
-        @user = User.find(user.id)
+      if user.username.downcase == username.downcase
+        @user = user
       end
     end
     puts @users
-    #@user = users.where(password: password)
     respond_to do |format|
       unless @user.nil?
         params[:id] = @user.id
@@ -91,6 +89,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :username)
+      params.require(:user).permit(:username)
     end
 end
