@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416053452) do
+ActiveRecord::Schema.define(version: 20150416075616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20150416053452) do
     t.boolean "movies"
     t.boolean "videogames"
     t.string  "bio"
+    t.string  "email"
+    t.string  "password"
   end
 
   create_table "widgets", force: true do |t|
