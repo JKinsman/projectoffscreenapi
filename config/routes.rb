@@ -59,5 +59,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   get 'users-find' => 'users#findByUsername'
-  patch 'user-settings' => 'users#set_settings'
+  put 'user-settings' => 'users#set_settings'
 end
