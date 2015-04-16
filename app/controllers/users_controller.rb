@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /user-settings.json
-  def setSettings
+  def set_settings
     puts "\n\n\n\n\n\n\n\n\n\nWAT\n\n\n\n\n\n\n\n\n\n"
     @users = User.all
     username = params[:username]
