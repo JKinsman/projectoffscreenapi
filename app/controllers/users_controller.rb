@@ -114,14 +114,15 @@ class UsersController < ApplicationController
           puts "\n\n\n\n\nsaved\n\n\n\n\n"
           params[:id] = @user.id
           format.json { render :show, status: :ok, location: @user }
+        else
+          respond_to do |format|
+            format.json { render json: "An Error occurred", status: :unprocessable_entity }
+          end
         end
       else 
         format.json { render json: "An Error occurred", status: :unprocessable_entity }
         return
       end
-    end
-    respond_to do |format|
-      format.json { render json: "An Error occurred", status: :unprocessable_entity }
     end
   end
   private
