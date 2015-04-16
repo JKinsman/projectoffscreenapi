@@ -81,6 +81,37 @@ class UsersController < ApplicationController
     end
   end
 
+  # POST /user_settings.json
+  def setSettings
+    Users = User.all
+    username = params[:username]
+    @user = nil
+    Users.each do |user|
+      if user.username.downcase == username.downcase
+        @user = user
+      end
+    end
+    unless @user.nil?
+      @user.age = params[:age]
+      @user.gender = params[:gender]
+      @user.career = params[:career]
+      @user.hiking = params[:hiking]
+      @user.biking = params[:biking]
+      @user.sports = params[:sports]
+      @user.reading = params[:reading]
+      @user.movies = params[:movies]
+      @user.videogames = params[:videogames]
+      @user.bio = params[:bio]
+      @user.save
+      respond_to do |format|
+        format.json { render :show, status: :ok, location: @user }
+      end
+    else
+      respond_to do |format|
+        format.json {render json: "An Error occurred", status: :unprocessable_entity }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -89,6 +120,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username)
+      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio)
     end
 end
