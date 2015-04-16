@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       unless @user.nil?
         params[:id] = @user.id
-        format.json { render :show, status: :ok, location: @user }
+        format.json { render json: @user, status: :ok, location: @user }
       else
         format.json { render json: "An Error occurred", status: :unprocessable_entity }
       end
