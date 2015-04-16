@@ -113,7 +113,7 @@ class UsersController < ApplicationController
         if @user.save
           puts "\n\n\n\n\nsaved\n\n\n\n\n"
           params[:id] = @user.id
-          format.json { render :show, status: :ok, location: @user }
+          format.json { render @user, status: :ok, location: @user }
         else
           respond_to do |format|
             format.json { render json: "An Error occurred", status: :unprocessable_entity }
