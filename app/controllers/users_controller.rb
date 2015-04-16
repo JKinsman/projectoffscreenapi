@@ -104,7 +104,9 @@ class UsersController < ApplicationController
         @user.movies = params[:movies]
         @user.videogames = params[:videogames]
         @user.bio = params[:bio]
+        puts "start" 
         puts @user.inspect
+        puts "end"
         if @user.save
           puts "\n\n\n\n\nsaved\n\n\n\n\n"
           params[:id] = @user.id
@@ -126,6 +128,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio)
+      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio, :user)
     end
 end
