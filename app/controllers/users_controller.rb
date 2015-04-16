@@ -117,6 +117,7 @@ class UsersController < ApplicationController
         end
       else 
         format.json { render json: "An Error occurred", status: :unprocessable_entity }
+        return
       end
     end
     respond_to do |format|
