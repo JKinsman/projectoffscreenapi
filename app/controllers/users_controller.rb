@@ -81,13 +81,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /user_settings.json
+  # PATCH/PUT /user-settings.json
   def setSettings
     puts "\n\n\n\n\n\n\n\n\n\nWAT\n\n\n\n\n\n\n\n\n\n"
-    Users = User.all
+    @users = User.all
     username = params[:username]
     @user = nil
-    Users.each do |user|
+    @users.each do |user|
       if user.username.downcase == username.downcase
         @user = user
       end
