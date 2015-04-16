@@ -105,6 +105,7 @@ class UsersController < ApplicationController
         @user.videogames = params[:videogames]
         @user.bio = params[:bio]
         if @user.save
+          params[:id] = @user.id
           format.json { render :show, status: :ok, location: @user }
         end
       else 
