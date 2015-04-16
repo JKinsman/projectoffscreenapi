@@ -104,7 +104,9 @@ class UsersController < ApplicationController
         @user.movies = params[:movies]
         @user.videogames = params[:videogames]
         @user.bio = params[:bio]
+        puts @user.inspect
         if @user.save
+          puts "\n\n\n\n\nsaved\n\n\n\n\n"
           params[:id] = @user.id
           format.json { render :show, status: :ok, location: @user }
         end
