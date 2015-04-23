@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 20150422582424) do
     t.boolean  "friends_videogames"
     t.integer  "friends_min_age"
     t.integer  "friends_max_age"
+    t.boolean  "dates_enabled"
+    t.boolean  "male_dates"
+    t.boolean  "female_dates"
+    t.boolean  "dates_sports"
+    t.boolean  "dates_biking"
+    t.boolean  "dates_hiking"
+    t.boolean  "datess_reading"
+    t.boolean  "dates_movies"
+    t.boolean  "dates_videogames"
+    t.integer  "dates_min_age"
+    t.integer  "dates_max_age"
   end
 
   create_table "widgets", force: true do |t|
