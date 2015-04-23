@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422582424) do
+ActiveRecord::Schema.define(version: 20150423003812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20150422582424) do
     t.boolean  "friends_videogames"
     t.integer  "friends_min_age"
     t.integer  "friends_max_age"
+    t.boolean  "colleagues_enabled"
+    t.boolean  "colleagues_journalist"
+    t.boolean  "colleagues_pharmacist"
+    t.boolean  "colleagues_office_assistant"
+    t.boolean  "colleagues_ceo"
+    t.boolean  "colleagues_accountant"
+    t.boolean  "colleagues_professor"
+    t.boolean  "colleagues_software_engineer"
   end
 
   create_table "widgets", force: true do |t|
