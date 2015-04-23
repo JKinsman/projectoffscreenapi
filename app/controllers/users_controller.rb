@@ -134,7 +134,7 @@ class UsersController < ApplicationController
         @user = user
       end
     end
-    repond_to do |format|
+    respond_to do |format|
       unless @user.nil?
         @user.male_friends = params[:male_friends]
         @user.female_friends = params[:female_friends]
