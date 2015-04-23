@@ -6,7 +6,7 @@ class DatesMigration < ActiveRecord::Migration
     add_column :users, :dates_sports, :boolean
     add_column :users, :dates_biking, :boolean
     add_column :users, :dates_hiking, :boolean
-    add_column :users, :datess_reading, :boolean
+    add_column :users, :dates_reading, :boolean
     add_column :users, :dates_movies, :boolean
     add_column :users, :dates_videogames, :boolean
     add_column :users, :dates_min_age, :integer
