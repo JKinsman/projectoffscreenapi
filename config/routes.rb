@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   #   end
   get 'users-find' => 'users#findByUsername'
   put 'user-settings' => 'users#set_settings'
+  put 'friends-settings' => 'users#set_friend_settings'
 end

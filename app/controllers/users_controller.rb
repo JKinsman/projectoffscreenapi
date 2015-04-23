@@ -124,6 +124,38 @@ class UsersController < ApplicationController
       end
     end
   end
+  # PATCH/PUT /friends_settings.json
+  def set_friend_settings
+    username = params[:username]
+    @user = nil
+    User.find_each do |user|
+      if user.username.downcase == username.downcase
+        @user = user
+      end
+    end
+    repond_to do |format|
+      unless @user.nil?
+        @user.male_friends = params[:male_friends]
+        @user.female_friends = params[:female_friends]
+        @user.friends_sports = params[:friends_sports]
+        @user.friends_hiking = params[:friends_hiking]
+        @user.friends_biking = params[:friends_biking]
+        @user.friends_reading = params[:friends_reading]
+        @user.friends_videogames = params[:friends_videogames]
+        @user.friends_movies = params[:friends_movies]
+        @user.friends_min_age = params[:friends_min_age]
+        @user.friends_max_age = params[:friends_max_age]
+        @user.friends_enabled = params[:friends_enabled]
+        if @user.save
+          format.json { render json: @user, status: :ok, location: @user }
+        else
+          format.json { render json: "An Error occurred", status: :unprocessable_entity }
+        end
+      else 
+        format.json { render json: "An Error occurred", status: :unprocessable_entity }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -132,6 +164,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio)
+      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio, :friends_enabled, :male_friends, :female_friends, :friends_sports, :friends_hiking, :friends_biking, :friends_reading, :friends_videogames, :friends_movies, :friends_min_age, :friends_max_age)
     end
 end
