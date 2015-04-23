@@ -62,4 +62,5 @@ Rails.application.routes.draw do
   put 'user-settings' => 'users#set_settings'
   put 'friends-settings' => 'users#set_friend_settings'
   put 'dates-settings' => 'users#set_date_settings'
+  put 'colleagues-settings' => 'users#set_colleague_settings'
 end
