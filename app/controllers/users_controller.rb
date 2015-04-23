@@ -126,6 +126,7 @@ class UsersController < ApplicationController
   end
   # PATCH/PUT /friends_settings.json
   def set_friend_settings
+    puts "WATWATWATWAT\n\n\n\n\n\n\n"
     username = params[:username]
     @user = nil
     User.find_each do |user|
