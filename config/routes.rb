@@ -63,4 +63,5 @@ Rails.application.routes.draw do
   put 'friends-settings' => 'users#set_friend_settings'
   put 'dates-settings' => 'users#set_date_settings'
   put 'colleagues-settings' => 'users#set_colleague_settings'
+  put 'user-image.json' => 'users#set_profile_picture'
 end

@@ -218,6 +218,28 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def set_profile_picture
+    username = params[:username]
+    @user = nil
+    User.find_each do |user|
+      if user.username.downcase == username.downcase
+        @user = user
+      end
+    end
+    respond_to do |format|
+      unless @user.nil?
+        @user.image = params[:image]
+        if @user.save
+          format.json {render json: @user, status: :ok, location: @user }
+        else
+          format.json { render json: "An Error occurred", status: :unprocessable_entity }
+        end
+      else
+        format.json { render json: "An Error occurred", status: :unprocessable_entity }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
