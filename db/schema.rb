@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430053436) do
+ActiveRecord::Schema.define(version: 201504300200000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150430053436) do
     t.boolean  "colleagues_accountant"
     t.boolean  "colleagues_professor"
     t.boolean  "colleagues_software_engineer"
-    t.text     "image"
+    t.text     "image",                        default: ""
   end
 
   create_table "widgets", force: true do |t|
