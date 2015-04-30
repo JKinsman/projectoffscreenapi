@@ -64,4 +64,5 @@ Rails.application.routes.draw do
   put 'dates-settings' => 'users#set_date_settings'
   put 'colleagues-settings' => 'users#set_colleague_settings'
   put 'user-image.json' => 'users#set_profile_picture'
+  put 'user-location.json' => 'users#set_location'
 end

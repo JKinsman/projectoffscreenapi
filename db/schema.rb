@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 201504300200000000) do
     t.boolean  "colleagues_accountant"
     t.boolean  "colleagues_professor"
     t.boolean  "colleagues_software_engineer"
-    t.text     "image",                        default: ""
+    t.text     "image",                                                 default: ""
+    t.decimal  "latitude",                     precision: 10, scale: 6
+    t.decimal  "longitude",                    precision: 10, scale: 6
   end
 
   create_table "widgets", force: true do |t|

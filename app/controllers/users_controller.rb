@@ -240,6 +240,28 @@ class UsersController < ApplicationController
       end
     end
   end
+  def set_location
+    username = params[:username]
+    @user = nil
+    User.find_each do |user|
+      if user.username.downcase == username.downcase
+        @user = user
+      end
+    end
+    respond_to do |format|
+      unless @user.nil?
+        @user.latitude = params[:latitude]
+        @user.longitude = params[:longitude]
+        if @user.save
+          format.json {render json: @user, status: :ok, location: @user }
+        else
+          format.json { render json: "An Error occurred", status: :unprocessable_entity }
+        end
+      else
+        format.json { render json: "An Error occurred", status: :unprocessable_entity }
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -248,6 +270,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio, :friends_enabled, :male_friends, :female_friends, :friends_sports, :friends_hiking, :friends_biking, :friends_reading, :friends_videogames, :friends_movies, :friends_min_age, :friends_max_age, :dates_enabled, :male_dates, :female_dates, :dates_sports, :dates_hiking, :dates_biking, :dates_reading, :dates_videogames, :dates_movies, :dates_min_age, :dates_max_age, :colleagues_enabled, :colleagues_journalist, :colleagues_pharmacist, :colleagues_office_assistant, :colleagues_ceo, :colleagues_accountant, :colleagues_professor, :colleagues_software_engineer, :image)
+      params.require(:user).permit(:username, :age, :gender, :career, :hiking, :biking, :sports, :reading, :movies, :videogames, :bio, :friends_enabled, :male_friends, :female_friends, :friends_sports, :friends_hiking, :friends_biking, :friends_reading, :friends_videogames, :friends_movies, :friends_min_age, :friends_max_age, :dates_enabled, :male_dates, :female_dates, :dates_sports, :dates_hiking, :dates_biking, :dates_reading, :dates_videogames, :dates_movies, :dates_min_age, :dates_max_age, :colleagues_enabled, :colleagues_journalist, :colleagues_pharmacist, :colleagues_office_assistant, :colleagues_ceo, :colleagues_accountant, :colleagues_professor, :colleagues_software_engineer, :image, :latitude, :longitude)
     end
 end
