@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 201504300200000000) do
     t.text     "image",                                                 default: ""
     t.decimal  "latitude",                     precision: 10, scale: 6
     t.decimal  "longitude",                    precision: 10, scale: 6
+    t.decimal  "distance"
   end
 
   create_table "widgets", force: true do |t|
