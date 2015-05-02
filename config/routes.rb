@@ -65,4 +65,5 @@ Rails.application.routes.draw do
   put 'colleagues-settings' => 'users#set_colleague_settings'
   put 'user-image.json' => 'users#set_profile_picture'
   put 'user-location.json' => 'users#set_location'
+  get 'find-matches' => 'users#find_matches'
 end

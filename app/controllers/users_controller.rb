@@ -253,7 +253,7 @@ class UsersController < ApplicationController
         @user.latitude = params[:latitude]
         @user.longitude = params[:longitude]
         if @user.save
-          format.json {render json: @user, status: :ok, location: @user }
+          format.json { render json: @user, status: :ok, location: @user }
         else
           format.json { render json: "An Error occurred", status: :unprocessable_entity }
         end
@@ -262,6 +262,27 @@ class UsersController < ApplicationController
       end
     end
   end
+  def find_matches
+    username = params[:username]
+    @user = nil
+    User.find_each do |user|
+      if user.username.downcase == username.downcase
+        @user = user
+      end
+    end
+    userLocs = []
+    #User.find_each do |user|
+    #  userLocs.push { username: user.username, id: user.id, lat: user.latitude, lng: user.longitude, image: user.image }
+    #end
+    matches = []
+    unless @user.nil?
+      matches = User.within(0.094697, @user)
+    end
+    respond_to do |format|
+      format.json { render json: matches, status: :ok, location: @user }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

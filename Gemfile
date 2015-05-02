@@ -38,3 +38,10 @@ gem 'puma'
 # gem 'debugger', group: [:development, :test]
 
 gem 'cowsay'
+
+gem 'geo-distance', '~> 0.2.0'
+
+gem 'geo_point', '~> 0.2.5'
+gem 'geo_units', '~> 0.2.4.1'
+
+gem 'geokit-rails'
