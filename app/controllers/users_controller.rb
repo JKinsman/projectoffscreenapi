@@ -263,6 +263,41 @@ class UsersController < ApplicationController
     end
   end
   def find_matches
+    def haversine_distance( lat1, lon1, lat2, lon2 )
+      max_distance_km = 100.0
+      radians_to_degrees             = 0.017453293
+ 
+      r_miles  = 3956           # radius of the great circle in miles
+      r_km     = 6371           # radius in kilometers, some algorithms use 6367
+      r_feet   = r_miles * 5282  # radius in feet
+      r_meters = r_km * 1000     # radius in meters
+ 
+
+      dlon = lon2 - lon1
+      dlat = lat2 - lat1
+ 
+      dlon_rad = dlon * radians_to_degrees
+      dlat_rad = dlat * radians_to_degrees
+ 
+      lat1_rad = lat1 * radians_to_degrees
+      lon1_rad = lon1 * radians_to_degrees
+ 
+      lat2_rad = lat2 * radians_to_degrees
+      lon2_rad = lon2 * radians_to_degrees
+      
+
+      a = (Math.sin(dlat_rad/2))**2 + Math.cos(lat1_rad) *
+        Math.cos(lat2_rad) * (Math.sin(dlon_rad/2))**2
+      c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a))
+ 
+      dMi     = r_miles * c      # delta between the two points in miles
+      dKm     = r_km * c         # delta in kilometers
+      dFeet   = r_feet * c       # delta in feet
+      dMeters = r_meters * c     # delta in meters
+ 
+      { :mi => dMi, :km => dKm, :ft => dFeet, :m => dMeters }
+    end
+    # Find @user
     username = params[:username]
     @user = nil
     User.find_each do |user|
@@ -271,12 +306,27 @@ class UsersController < ApplicationController
       end
     end
     userLocs = []
-    #User.find_each do |user|
-    #  userLocs.push { username: user.username, id: user.id, lat: user.latitude, lng: user.longitude, image: user.image }
-    #end
+    # User.find_each do |user|
+    #   userLocs.push { username: user.username, id: user.id, lat: user.latitude, lng: user.longitude, image: user.image }
+    # end
+    p_matches = []
     matches = []
-    unless @user.nil?
-      matches = User.within(0.094697, @user)
+    # If the user has a lat, long
+    if !@user.nil? and !@user.latitude.nil? and !@user.longitude.nil?
+      # Find potential matches
+      User.find_each do |user|
+        if user.id != @user.id and !user.latitude.nil? and !user.longitude.nil?
+          # A user is a potential match if they aren't the user requesting matches, 
+          # and they have a valid (non-nil) lat/long
+          p_matches.push user
+        end 
+      end
+    end
+    # Filter potential matches by GPS location
+    p_matches.each_with_index do |user, index|
+      if haversine_distance(@user.latitude, @user.longitude, user.latitude, user.longitude)[:ft] <= 500
+        matches.push user
+      end
     end
     respond_to do |format|
       format.json { render json: matches, status: :ok, location: @user }
